@@ -30,7 +30,7 @@
     "sqlite3": "^5.0.2",
     "swagger-routes-express": "^3.3.0",
     "typescript": "^4.3.2",
-    "validator": "^13.6.0",
+    "validator": "^13.7.0",
     "winston": "^3.3.3",
     "yamljs": "^0.3.0"
   },
