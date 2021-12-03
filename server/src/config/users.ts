@@ -1,6 +1,7 @@
 export type User = {
   username: string
   password: string
+  email: String
   roles: number[]
 }
 
@@ -25,6 +26,7 @@ export const users: User[] = [
   {
     username: "Wookiee",
     password: "Password",
+    email: "me@here.com",
     roles: [1],
   },
 ]
