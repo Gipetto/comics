@@ -22,7 +22,7 @@
 	export let url = ""
 
 	initClient({
-		url: "http://localhost:3000/graphql",
+		url: "/graphql",
 		fetchOptions: () => {
 		// insert api auth token header once we have authorization
 		/*
