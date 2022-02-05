@@ -14,11 +14,23 @@ import { resolvers } from "./resolvers"
 import { db, paginateQuery, countTable } from "./database"
 import { grades, config } from "./config"
 
+require("dotenv").config()
+
 const morgan = require("morgan")("combined")
+const cookieParser = require("cookie-parser")
+
+// console.log("TYPES TYPES TYPES")
+// declare global {
+//   namespace Express {
+//     export interface Request {
+//       user: any
+//     }
+//   }
+// }
 
 const configGraphQL = (server: Express) => {
   const schema = loadSchemaSync("./src/graphql/schema.generated.graphql", {
-    loaders: [new GraphQLFileLoader()],
+    loaders: [new GraphQLFileLoader()]
   })
 
   server.use(
@@ -26,7 +38,7 @@ const configGraphQL = (server: Express) => {
     graphqlHTTP({
       schema: addResolversToSchema({
         schema,
-        resolvers,
+        resolvers
       }),
       graphiql: true,
       pretty: config.currentEnv === "development",
@@ -34,10 +46,10 @@ const configGraphQL = (server: Express) => {
         database: {
           db,
           paginateQuery,
-          countTable,
+          countTable
         },
-        grades: grades,
-      },
+        grades: grades
+      }
     })
   )
 }
@@ -55,7 +67,7 @@ const configHealthcheck = (server: Express) => {
       next: express.NextFunction
     ) => {
       res.send({
-        status: "OK",
+        status: "OK"
       })
       next()
     }
@@ -68,6 +80,7 @@ async function genServer(): Promise<Express> {
   server.use(compression())
   server.use(cors())
   server.use(express.json())
+  server.use(cookieParser())
 
   configHealthcheck(server)
   configGraphQL(server)

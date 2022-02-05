@@ -1,7 +1,10 @@
 <script lang="ts">
-import sessionStore, { defaultSession } from "../../stores/session"
-import { navigate } from "svelte-routing"
+import { sessionStore, defaultSession } from "../../stores/session"
+import { maybeRedirect } from "../../helpers/routing";
 
-sessionStore.set(defaultSession)
-navigate("/")
+fetch("/v1/logout").then((response) => response.text())
+  .then(() => {
+    sessionStore.set(defaultSession)
+    maybeRedirect("/")
+  })
 </script>

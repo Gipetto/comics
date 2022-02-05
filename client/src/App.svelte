@@ -54,7 +54,7 @@
 		</Authenticated>
 	</Route>
 	<Route path="comics/titles/:id/properties" let:params>
-		<TitleProperties id={params.id} type="title" />
+		<TitleProperties id={params.id} />
 	</Route>
 	<Route path="comics/titles/:id" let:params>
 		<Title id={params.id} />

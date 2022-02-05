@@ -6,8 +6,9 @@ type Role = {
 }
 
 type UserSession = {
+  id: number
   username: string
-  roles: Role[]
+  email: string
 }
 
 type LoginResponse = UserSession | Error
