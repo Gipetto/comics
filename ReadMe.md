@@ -37,6 +37,33 @@ To update services after changing the schema just run `yarn generate` in the roo
 - `server/src/types/schemas.generated.ts`: This is all GraphQL types converted to TypeScript types for import.
 - `client/src/graphql/schemas.generated.ts`: This is both type and query definitions of the GraphQL schema. Separating them would be great, but the generator isn't very good at doing imports, so a single file is much easier to manage.
 
+## DB Migrations
+
+DB is managed via `Knex`. The `server/package.json` contains a script helper to run `knex` from the `node_modules` folder.
+
+Full docs on Knex migrations: https://knexjs.org/#Migrations
+
+List migrations:
+
+```
+cd server
+yarn run knex migrate:list
+```
+
+Create a migration:
+
+```
+cd server
+yarn run knex migrate:make {migration_name} -x ts
+```
+
+Run the specific migration:
+
+```
+cd server
+yarn run knex migrate:up {migration_name}.ts
+```
+
 # TODO
 
 - [ ] Run `yarn generate` before every dev, test and build

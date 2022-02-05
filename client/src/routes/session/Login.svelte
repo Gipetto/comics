@@ -1,23 +1,16 @@
 <script lang="ts">
-import sessionStore from "../../stores/session"
-import { navigate } from "svelte-routing"
+import { sessionStore } from "../../stores/session"
+import { maybeRedirect } from "../../helpers/routing"
 
-let username: string
+let email: string
 let password: string
 $: loginError = undefined
-
-const maybeRedirect = () => {
-  const redirectLocation = new URLSearchParams(window.location.search).get("g")
-  if (redirectLocation) {
-    navigate(redirectLocation)
-  }
-}
 
 const login = async (): Promise<void> => { 
   loginError = undefined
 
   const params = {
-    username,
+    email,
     password
   }
 
@@ -47,12 +40,17 @@ const login = async (): Promise<void> => {
     loginError = responseData.message
   }
 }
+
+const cancelLogin = (e: Event) => {
+  e.preventDefault()
+  window.history.go(-1)
+}
 </script>
 
 <section id="login">
   <div class="login-wrapper">
     <h2>Authentication Required</h2>
-    <p>This server requires a username and password. The server says: Restricted Area</p>
+    <p>This server requires a email and password. The server says: Restricted Area</p>
     {#if loginError}
       <div class="error">
         <p>{loginError}</p>
@@ -60,14 +58,14 @@ const login = async (): Promise<void> => {
     {/if}
     <form on:submit|preventDefault={login} autocomplete=off>
       <p>
-        <label for="username">User Name: </label>
-        <input type="text" id="username" name="username" bind:value={username} />
+        <label for="username">Email: </label>
+        <input type="text" id="email" name="email" bind:value={email} />
       </p>
       <p>
         <label for="password">Password:</label>
         <input type="password" id="password" name="username" bind:value={password} /> 
       </p>
-      <button type="submit">Log in</button> &nbsp; <button type="cancel">Cancel</button>
+      <button type="submit">Log in</button> &nbsp; <button on:click={cancelLogin} type="cancel">Cancel</button>
     </form>
   </div>
 </section>

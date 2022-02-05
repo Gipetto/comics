@@ -1,7 +1,8 @@
 <script lang="ts">
 import { link } from "svelte-routing"
 import { properties } from "../stores/properties"
-import sessionStore from "../stores/session"
+import { sessionStore } from "../stores/session"
+import { pathStore } from "../stores/session"
 </script>
 
 <footer>
@@ -11,7 +12,7 @@ import sessionStore from "../stores/session"
 		{#if $sessionStore.username }
 			<a use:link href="/logout">logout ({$sessionStore.username})</a>
 		{:else}
-			<a use:link href="/login?g={window.location.pathname}">log in</a>
+			<a use:link href="/login?g={$pathStore}">log in</a>
 		{/if}
 	</p>
 </footer>

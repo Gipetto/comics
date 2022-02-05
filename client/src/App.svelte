@@ -22,7 +22,7 @@
 	export let url = ""
 
 	initClient({
-		url: "http://localhost:3000/graphql",
+		url: "/graphql",
 		fetchOptions: () => {
 		// insert api auth token header once we have authorization
 		/*
@@ -54,7 +54,7 @@
 		</Authenticated>
 	</Route>
 	<Route path="comics/titles/:id/properties" let:params>
-		<TitleProperties id={params.id} type="title" />
+		<TitleProperties id={params.id} />
 	</Route>
 	<Route path="comics/titles/:id" let:params>
 		<Title id={params.id} />
