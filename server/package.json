@@ -25,7 +25,7 @@
     "express-openapi-validator": "^4.12.11",
     "graphql": "^15.5.1",
     "http-proxy-middleware": "^2.0.1",
-    "knex": "^0.95.9",
+    "knex": "^2.4.0",
     "morgan": "^1.10.0",
     "sqlite3": "^5.0.2",
     "swagger-routes-express": "^3.3.0",
